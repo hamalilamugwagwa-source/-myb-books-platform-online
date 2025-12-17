@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYB - Creative Writing & Storytelling</title>
+    <meta name="description" content="MYB - Your creative writing and storytelling platform. Discover amazing stories, read online for free, and download for offline reading.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://www.genspark.ai/api/files/s/V1iPDOYw">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="nav-brand">
+                <img src="/uploads/1765977110932-The_choice.png" alt="MYB Logo" class="brand-logo" onerror="this.onerror=null;this.src='https://www.genspark.ai/api/files/s/V1iPDOYw'">
+                <span class="brand-name">M.Y.B books</span>
+            </div>
+            
+            <div class="nav-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="nav-search-input" placeholder="Search books, authors, genres...">
+            </div>
+            
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active" data-page="home">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#library" class="nav-link" data-page="library">
+                    <i class="fas fa-book"></i>
+                    <span>Library</span>
+                </a>
+                <a href="#mylibrary" class="nav-link" data-page="mylibrary">
+                    <i class="fas fa-bookmark"></i>
+                    <span>My Books</span>
+                </a>
+                <a href="#profile" class="nav-link" data-page="profile">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="#admin" class="nav-link" id="nav-admin" data-page="admin" style="display:none;">
+                    <i class="fas fa-cog"></i>
+                    <span>Admin</span>
+                </a>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="btn-icon" id="theme-toggle" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn-primary" id="auth-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In
+                </button>
+            </div>
+            
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="main-content">
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Creative Writing & <span class="highlight">Storytelling</span></h1>
+                        <p class="hero-subtitle">Discover amazing stories from talented writers. Read online for free or download your favorites for offline reading.</p>
+                        <div class="hero-cta">
+                            <button class="btn-large btn-primary" onclick="navigateTo('library')">
+                                <i class="fas fa-book-reader"></i>
+                                Browse Library
+                            </button>
+                            <button class="btn-large btn-outline" onclick="navigateTo('library')">
+                                <i class="fas fa-fire"></i>
+                                Trending Now
+                            </button>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="stat">
+                                <strong>1M+</strong>
+                                <span>Stories</span>
+                            </div>
+                            <div class="stat">
+                                <strong>50M+</strong>
+                                <span>Readers</span>
+                            </div>
+                            <div class="stat">
+                                <strong>100+</strong>
+                                <span>Genres</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Books Section -->
+            <section class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-star"></i>
+                            Featured Stories
+                        </h2>
+                        <a href="#library" class="view-all" onclick="navigateTo('library')">View All <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="books-grid" id="featured-books"></div>
+                </div>
+            </section>
+
+            <!-- Trending Section -->
+            <section class="section section-alt">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-fire"></i>
+                            Trending Now
+                        </h2>
+                        <a href="#library" class="view-all" onclick="navigateTo('library')">View All <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="books-grid" id="trending-books"></div>
+                </div>
+            </section>
+
+            <!-- Genres Section -->
+            <section class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-layer-group"></i>
+                            Browse by Genre
+                        </h2>
+                    </div>
+                    <div class="genres-grid" id="genres-grid"></div>
+                </div>
+            </section>
+
+            <!-- Newsletter Section -->
+            <section class="section section-newsletter">
+                <div class="container">
+                    <div class="newsletter-content">
+                        <div class="newsletter-text">
+                            <h2><i class="fas fa-envelope"></i> Stay Updated</h2>
+                            <p>Subscribe to get the latest stories, author updates, and exclusive content delivered to your inbox.</p>
+                        </div>
+                        <form class="newsletter-form" id="newsletter-form">
+                            <input type="email" placeholder="Enter your email address" required>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-paper-plane"></i>
+                                Subscribe
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="section section-stats">
+                <div class="container">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-book"></i>
+                            <h3 id="total-books-stat">1,000+</h3>
+                            <p>Amazing Stories</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-users"></i>
+                            <h3>50,000+</h3>
+                            <p>Active Readers</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-pen-fancy"></i>
+                            <h3>500+</h3>
+                            <p>Talented Authors</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-star"></i>
+                            <h3>4.8/5</h3>
+                            <p>Average Rating</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Library Page -->
+        <div id="library-page" class="page">
+            <section class="page-header">
+                <div class="container">
+                    <h1 class="page-title">Explore Our Library</h1>
+                    <p class="page-subtitle">Discover thousands of amazing stories across all genres</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="library-filters">
+                        <div class="filter-group">
+                            <label for="genre-filter">Genre:</label>
+                            <select id="genre-filter" class="filter-select">
+                                <option value="">All Genres</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="sort-filter">Sort By:</label>
+                            <select id="sort-filter" class="filter-select">
+                                <option value="popular">Most Popular</option>
+                                <option value="recent">Recently Added</option>
+                                <option value="rating">Highest Rated</option>
+                                <option value="title">Title A-Z</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="status-filter">Status:</label>
+                            <select id="status-filter" class="filter-select">
+                                <option value="">All</option>
+                                <option value="completed">Completed</option>
+                                <option value="ongoing">Ongoing</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="library-content">
+                        <div class="books-grid" id="library-books"></div>
+                        <div class="pagination" id="pagination"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Book Detail Page -->
+        <div id="book-detail-page" class="page">
+            <section class="book-detail-hero">
+                <div class="container">
+                    <div class="book-detail-content" id="book-detail-content"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Reader Page -->
+        <div id="reader-page" class="page">
+            <div class="reader-container" id="reader-container"></div>
+        </div>
+
+        <!-- My Library Page -->
+        <div id="mylibrary-page" class="page">
+            <section class="page-header">
+                <div class="container">
+                    <h1 class="page-title">My Library</h1>
+                    <p class="page-subtitle">Your reading list and purchased books</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="my-library-tabs">
+                        <button class="tab-btn active" data-tab="reading">
+                            <i class="fas fa-book-reader"></i>
+                            Currently Reading
+                        </button>
+                        <button class="tab-btn" data-tab="purchased">
+                            <i class="fas fa-shopping-bag"></i>
+                            Purchased Books
+                        </button>
+                        <button class="tab-btn" data-tab="favorites">
+                            <i class="fas fa-heart"></i>
+                            Favorites
+                        </button>
+                    </div>
+                    
+                    <div class="tab-content active" id="reading-content">
+                        <div class="books-grid" id="reading-books"></div>
+                    </div>
+                    <div class="tab-content" id="purchased-content">
+                        <div class="books-grid" id="purchased-books"></div>
+                    </div>
+                    <div class="tab-content" id="favorites-content">
+                        <div class="books-grid" id="favorites-books"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Profile Page -->
+        <div id="profile-page" class="page">
+            <section class="profile-section">
+                <div class="container">
+                    <div class="profile-card" id="profile-card"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Admin Page -->
+        <div id="admin-page" class="page">
+            <section class="page-header">
+                <div class="container">
+                    <h1 class="page-title">Admin Dashboard</h1>
+                    <p class="page-subtitle">Manage books and site content</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container admin-panel">
+                    <div class="admin-grid">
+                        <div class="admin-card">
+                            <h3>Add / Edit Book</h3>
+                            <form id="admin-add-book-form">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input id="admin-book-title" type="text" required placeholder="Book title">
+                                </div>
+                                <div class="form-group">
+                                    <label>Author</label>
+                                    <input id="admin-book-author" type="text" required placeholder="Author">
+                                </div>
+                                <div class="form-group">
+                                    <label>Genre</label>
+                                    <input id="admin-book-genre" type="text" placeholder="Genre">
+                                </div>
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    <input id="admin-book-price" type="number" step="0.01" placeholder="0.00">
+                                </div>
+                                <div class="form-group">
+                                    <label>Synopsis</label>
+                                    <textarea id="admin-book-synopsis" rows="3" placeholder="Short synopsis"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Cover Image</label>
+                                    <input id="admin-book-cover" type="file" accept="image/*">
+                                    <div id="admin-book-cover-preview" style="margin-top:.5rem;"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Book PDF (optional)</label>
+                                    <input id="admin-book-pdf" type="file" accept="application/pdf">
+                                    <div id="admin-book-pdf-preview" style="margin-top:.5rem;font-size:0.9rem;color:var(--text-secondary);"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Published</label>
+                                    <label style="display:flex;align-items:center;gap:.5rem;"><input id="admin-book-published" type="checkbox"> Published (visible to readers)</label>
+                                </div>
+                                <div style="display:flex;gap:.5rem;align-items:center;margin-top:.5rem;">
+                                    <button type="submit" class="btn-primary">Save</button>
+                                    <button type="button" id="admin-cancel-edit" class="btn-outline">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="admin-card">
+                            <h3>Books on Platform</h3>
+                            <div id="admin-books-list" class="books-grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="auth-modal">
+        <div class="modal-overlay" onclick="closeModal('auth-modal')"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('auth-modal')">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="signin">Sign In</button>
+                    <button class="auth-tab" data-tab="signup">Sign Up</button>
+                </div>
+                
+                <!-- Sign In Form -->
+                <form id="signin-form" class="auth-form active">
+                    <h2>Welcome Back!</h2>
+                    <p class="auth-subtitle">Sign in to continue your reading journey</p>
+                    
+                    <div class="form-group">
+                        <label for="signin-email">Email</label>
+                        <input type="email" id="signin-email" required placeholder="your@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signin-password">Password</label>
+                        <input type="password" id="signin-password" required placeholder="••••••••">
+                    </div>
+                    
+                    <button type="submit" class="btn-primary btn-block">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Sign In
+                    </button>
+                    
+                    <div class="auth-divider">or</div>
+                    
+                    <button type="button" class="btn-outline btn-block">
+                        <i class="fab fa-google"></i>
+                        Continue with Google
+                    </button>
+                </form>
+                
+                <!-- Sign Up Form -->
+                <form id="signup-form" class="auth-form">
+                    <h2>Join BookVerse</h2>
+                    <p class="auth-subtitle">Create an account to start reading</p>
+                    
+                    <div class="form-group">
+                        <label for="signup-username">Username</label>
+                        <input type="text" id="signup-username" required placeholder="Choose a username">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" required placeholder="your@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" required placeholder="••••••••">
+                    </div>
+                    
+                    <button type="submit" class="btn-primary btn-block">
+                        <i class="fas fa-user-plus"></i>
+                        Create Account
+                    </button>
+                    
+                    <div class="auth-divider">or</div>
+                    
+                    <button type="button" class="btn-outline btn-block">
+                        <i class="fab fa-google"></i>
+                        Sign up with Google
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal" id="payment-modal">
+        <div class="modal-overlay" onclick="closeModal('payment-modal')"></div>
+        <div class="modal-content modal-medium">
+            <button class="modal-close" onclick="closeModal('payment-modal')">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="payment-container" id="payment-container"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <img src="/uploads/1765977110932-The_choice.png" alt="MYB Logo" class="footer-logo" onerror="this.onerror=null;this.src='https://www.genspark.ai/api/files/s/V1iPDOYw'">
+                        <h3>M.Y.B books</h3>
+                    </div>
+                    <p class="footer-tagline">Creative Writing & Storytelling Platform</p>
+                    <p class="footer-description">Discover amazing stories from talented writers around the world. Read online for free or download for offline reading.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home" onclick="navigateTo('home')">Home</a></li>
+                        <li><a href="#library" onclick="navigateTo('library')">Browse Library</a></li>
+                        <li><a href="#" onclick="filterByGenre('Romance')">Romance Stories</a></li>
+                        <li><a href="#" onclick="filterByGenre('Fantasy')">Fantasy Stories</a></li>
+                        <li><a href="#" onclick="filterByGenre('Sci-Fi')">Sci-Fi Stories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Community</h4>
+                    <ul class="footer-links">
+                        <li><a href="#mylibrary" onclick="navigateTo('mylibrary')">My Library</a></li>
+                        <li><a href="#profile" onclick="navigateTo('profile')">My Profile</a></li>
+                        <li><a href="#">Writing Guidelines</a></li>
+                        <li><a href="#">Community Forum</a></li>
+                        <li><a href="#">Author Resources</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Report Content</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 MYB - Creative Writing & Storytelling. All rights reserved.</p>
+                <p>Made with <i class="fas fa-heart"></i> for book lovers everywhere</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>
